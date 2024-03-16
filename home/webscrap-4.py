@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 from bs4 import BeautifulSoup
+import pandas as pd
 import requests
 # from config import user,password
 
@@ -20,8 +21,8 @@ time.sleep(3)  # Adjust the sleep time as needed
 username_field = driver.find_element(By.XPATH, "//input[@type='text']")
 password_field = driver.find_element(By.XPATH, "//input[@type='password']")
 
-username_field.send_keys("9370664563")
-password_field.send_keys("@Sniper9370")
+username_field.send_keys("7820867566")
+password_field.send_keys("@Akshay93")
 
 print('Adding credintionals')
 
@@ -38,19 +39,37 @@ time.sleep(3)  # Adjust the sleep time as needed
 # driver.get(url_data)
 driver.get(url_data)
 
+
 # Wait for the data page to load (you may need to adjust the wait time)
 # time.sleep(5)  # Adjust the sleep time as needed
 
 # Get the HTML content of the data page
 # html = driver.page_source
 
+
+
 html = driver.page_source
 
 time.sleep(5)
 
+# table = pd.read_html(url_data)
+# print(table)
+# print('check-content')
+
 # Use BeautifulSoup to parse the HTML content
 soup = BeautifulSoup(html, 'html.parser')
-print(soup.prettify())
+
+# tbody = soup.find('div', class_='parity')
+# # print(soup.prettify())
+# print(tbody)
+
+trs = soup.find_all('tr')
+
+# Iterate over each <tr> element and find all <td> elements within it
+for tr in trs:
+    tds = tr.find_all('td')
+    for td in tds:
+        print(td)
 
 print('getting data')
 
@@ -59,3 +78,6 @@ time.sleep(10)
 # Don't forget to close the browser when done
 
 driver.quit()
+
+
+
